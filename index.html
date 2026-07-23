@@ -1,591 +1,105 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SwissAdmin.ai Newsletter - Quelle forme juridique choisir ?</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-            background-color: #F8F5F0;
-            -webkit-font-smoothing: antialiased;
-        }
-        
-        .email-container {
-            max-width: 900px;
-            margin: 0 auto;
-            background-color: #F8F5F0;
-        }
-        
-        @media only screen and (max-width: 920px) {
-            .email-container {
-                max-width: 600px;
-            }
-        }
-        
-        /* Header */
-        .header {
-            background-color: #FFFFFF;
-            padding: 40px 60px;
-            border-bottom: 4px solid #DC143C;
-        }
-        
-        @media only screen and (max-width: 920px) {
-            .header {
-                padding: 32px 40px;
-            }
-        }
-        
-        .logo {
-            font-family: 'Courier New', monospace;
-            font-size: 22px;
-            font-weight: bold;
-            color: #1A1A1A;
-            margin: 0;
-        }
-        
-        .logo-flag {
-            display: inline-block;
-            background-color: #DC143C;
-            color: white;
-            padding: 4px 10px;
-            border-radius: 4px;
-            margin-right: 8px;
-        }
-        
-        .issue-number {
-            color: #717171;
-            font-size: 14px;
-            margin-top: 8px;
-        }
-        
-        /* Welcome Section */
-        .welcome {
-            background-color: #FFFFFF;
-            padding: 40px 60px;
-            margin-top: 2px;
-        }
-        
-        @media only screen and (max-width: 920px) {
-            .welcome {
-                padding: 32px 40px;
-            }
-        }
-        
-        .welcome h2 {
-            font-size: 16px;
-            color: #4A4A4A;
-            margin: 0 0 12px 0;
-            font-weight: 500;
-        }
-        
-        .welcome p {
-            font-size: 15px;
-            line-height: 1.6;
-            color: #4A4A4A;
-            margin: 0;
-        }
-        
-        /* Main Content */
-        .content {
-            background-color: #FFFFFF;
-            margin-top: 2px;
-            padding: 50px 60px;
-        }
-        
-        @media only screen and (max-width: 920px) {
-            .content {
-                padding: 40px;
-            }
-        }
-        
-        .content-header {
-            text-align: center;
-            margin-bottom: 32px;
-        }
-        
-        .content-label {
-            display: inline-block;
-            background-color: #FFD93D;
-            color: #1A1A1A;
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            padding: 6px 16px;
-            border-radius: 0;
-            margin-bottom: 16px;
-        }
-        
-        .content h1 {
-            font-size: 28px;
-            color: #1A1A1A;
-            margin: 0;
-            line-height: 1.3;
-            font-weight: 700;
-        }
-        
-        .content-intro {
-            font-size: 16px;
-            line-height: 1.7;
-            color: #4A4A4A;
-            margin: 24px 0;
-        }
-        
-        /* Feature Cards */
-        .option-card {
-            background-color: #F8F9FA;
-            border-left: 4px solid #DC143C;
-            padding: 24px;
-            margin-bottom: 20px;
-            border-radius: 0;
-        }
-        
-        .option-card h3 {
-            font-size: 20px;
-            color: #1A1A1A;
-            margin: 0 0 4px 0;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .option-emoji {
-            font-size: 24px;
-        }
-        
-        .option-subtitle {
-            font-size: 14px;
-            color: #717171;
-            font-weight: 500;
-            margin-bottom: 16px;
-        }
-        
-        .option-card p {
-            font-size: 15px;
-            line-height: 1.6;
-            color: #4A4A4A;
-            margin: 12px 0;
-        }
-        
-        .pros-cons {
-            margin: 16px 0;
-        }
-        
-        .pros-cons h4 {
-            font-size: 14px;
-            color: #1A1A1A;
-            font-weight: 700;
-            margin: 12px 0 8px 0;
-        }
-        
-        .pros-cons ul {
-            margin: 0;
-            padding-left: 20px;
-        }
-        
-        .pros-cons li {
-            font-size: 14px;
-            line-height: 1.6;
-            color: #4A4A4A;
-            margin-bottom: 4px;
-        }
-        
-        .cost-badge {
-            display: inline-block;
-            background-color: #DC143C;
-            color: white;
-            font-size: 14px;
-            font-weight: 700;
-            padding: 8px 16px;
-            border-radius: 0;
-            margin-top: 12px;
-        }
-        
-        /* CTA Section */
-        .cta-section {
-            background: linear-gradient(135deg, #DC143C 0%, #B01030 100%);
-            padding: 40px 60px;
-            margin-top: 2px;
-            text-align: center;
-        }
-        
-        @media only screen and (max-width: 920px) {
-            .cta-section {
-                padding: 32px 40px;
-            }
-        }
-        
-        .cta-section h3 {
-            color: white;
-            font-size: 20px;
-            margin: 0 0 12px 0;
-        }
-        
-        .cta-section p {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 15px;
-            margin: 0 0 20px 0;
-        }
-        
-        .cta-button {
-            display: inline-block;
-            background-color: #FFD93D;
-            color: #1A1A1A;
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: 700;
-            padding: 14px 32px;
-            border-radius: 0;
-            transition: all 0.3s ease;
-        }
-        
-        .cta-button:hover {
-            background-color: #FFC700;
-            transform: translateY(-2px);
-        }
-        
-        /* Tip Section */
-        .tip-section {
-            background-color: #FFFBF0;
-            border-left: 4px solid #FFD93D;
-            border-radius: 0;
-            padding: 24px;
-            margin: 24px 0;
-        }
-        
-        .tip-section h4 {
-            font-size: 16px;
-            color: #1A1A1A;
-            margin: 0 0 8px 0;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .tip-section p {
-            font-size: 15px;
-            line-height: 1.6;
-            color: #4A4A4A;
-            margin: 0;
-        }
-        
-        /* Resources */
-        .resources {
-            background-color: #FFFFFF;
-            padding: 40px 60px;
-            margin-top: 2px;
-        }
-        
-        @media only screen and (max-width: 920px) {
-            .resources {
-                padding: 32px 40px;
-            }
-        }
-        
-        .resources h3 {
-            font-size: 18px;
-            color: #1A1A1A;
-            margin: 0 0 16px 0;
-        }
-        
-        .resource-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        
-        .resource-list li {
-            margin-bottom: 12px;
-        }
-        
-        .resource-list a {
-            color: #DC143C;
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: 500;
-        }
-        
-        .resource-list a:hover {
-            text-decoration: underline;
-        }
-        
-        /* Next Week Preview */
-        .next-week {
-            background-color: #F8F9FA;
-            padding: 32px 60px;
-            margin-top: 2px;
-        }
-        
-        @media only screen and (max-width: 920px) {
-            .next-week {
-                padding: 24px 40px;
-            }
-        }
-        
-        .next-week h4 {
-            font-size: 14px;
-            color: #717171;
-            margin: 0 0 8px 0;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        .next-week p {
-            font-size: 16px;
-            color: #1A1A1A;
-            margin: 0;
-            font-weight: 600;
-        }
-        
-        /* Footer */
-        .footer {
-            background-color: #FFFFFF;
-            padding: 40px 60px;
-            margin-top: 2px;
-            text-align: center;
-            border-top: 2px solid #E5E5E5;
-        }
-        
-        @media only screen and (max-width: 920px) {
-            .footer {
-                padding: 32px 40px;
-            }
-        }
-        
-        .footer p {
-            font-size: 13px;
-            color: #717171;
-            line-height: 1.6;
-            margin: 8px 0;
-        }
-        
-        .footer a {
-            color: #DC143C;
-            text-decoration: none;
-        }
-        
-        .footer a:hover {
-            text-decoration: underline;
-        }
-        
-        .social-links {
-            margin: 16px 0;
-        }
-        
-        .social-links a {
-            display: inline-block;
-            margin: 0 8px;
-            color: #717171;
-            font-size: 13px;
-        }
-        
-        /* Mobile Responsive */
-        @media only screen and (max-width: 600px) {
-            .header,
-            .welcome,
-            .content,
-            .cta-section,
-            .resources,
-            .next-week,
-            .footer {
-                padding: 24px 20px !important;
-            }
-            
-            .content h1 {
-                font-size: 24px !important;
-            }
-            
-            .option-card {
-                padding: 20px !important;
-            }
-        }
-        
-        @media only screen and (min-width: 921px) {
-            body {
-                padding: 20px 0;
-            }
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SwissAdmin.ai — L'administration suisse, enfin claire</title>
+<meta name="description" content="La lettre hebdomadaire des entrepreneurs romands. Une démarche administrative expliquée pas à pas, chaque semaine.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f3f2f2; --text:#201e1d; --accent:#ec3013; --accent-deep:#b3260f;
+    --rule:#201e1d; --rule-soft:#d0cecd;
+    --font:'Archivo',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;}
+  body{background:var(--bg);color:var(--text);font-family:var(--font);-webkit-font-smoothing:antialiased;line-height:1.55;}
+  a{color:var(--accent-deep);}
+  a:hover{color:var(--accent);}
+  ::selection{background:rgba(236,48,19,.22);}
+  .shell{max-width:560px;margin:0 auto;min-height:100vh;background:var(--bg);border-left:1px solid var(--rule);border-right:1px solid var(--rule);}
+  @media(max-width:560px){.shell{border-left:0;border-right:0;}}
+
+  .pad{padding:30px 32px;}
+  @media(max-width:480px){.pad{padding:26px 22px;}}
+  .seam{border-top:1px solid var(--rule);}
+
+  .brand{display:inline-flex;align-items:center;gap:11px;text-decoration:none;color:var(--text);}
+  .brand .sq{width:18px;height:18px;background:var(--accent);flex:none;}
+  .brand .wm{font-weight:700;font-size:16px;letter-spacing:.16em;text-transform:uppercase;}
+  .brand .wm .dot{text-transform:none;letter-spacing:0;color:var(--accent);}
+
+  h1.lede{font-weight:800;font-size:38px;line-height:1.0;letter-spacing:-.03em;margin:26px 0 0;margin-left:-.03em;}
+  .sub{font-size:15px;margin:16px 0 0;color:rgba(32,30,29,.8);}
+
+  .btn{display:block;width:100%;font-family:var(--font);font-weight:700;font-size:15px;text-align:left;
+    background:var(--accent);color:var(--bg);border:0;padding:15px 18px;margin-top:22px;cursor:pointer;text-decoration:none;}
+  .btn:hover{background:#d42a10;color:var(--bg);}
+
+  .kicker{display:block;font-weight:700;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-deep);}
+
+  .ed{display:grid;grid-template-columns:auto 1fr;gap:16px;padding:18px 0;border-top:1px solid var(--rule-soft);align-items:baseline;text-decoration:none;color:var(--text);}
+  .ed:hover .t{color:var(--accent);}
+  .ed .n{font-weight:800;font-size:13px;color:var(--accent);font-feature-settings:'tnum' 1;}
+  .ed .t{display:block;font-weight:700;font-size:17px;line-height:1.2;}
+  .ed .d{display:block;font-size:12.5px;margin-top:5px;color:rgba(32,30,29,.6);}
+  .all{display:block;padding:16px 0;border-top:1px solid var(--rule-soft);font-weight:700;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--accent-deep);text-decoration:none;}
+  .all:hover{color:var(--accent);}
+
+  .about p{font-size:14px;line-height:1.6;margin:12px 0 0;color:rgba(32,30,29,.82);}
+  .about strong{color:var(--text);}
+
+  .res{display:block;padding:11px 0;border-top:1px solid var(--rule-soft);font-size:14.5px;font-weight:600;color:var(--text);text-decoration:none;}
+  .res:hover{color:var(--accent);}
+
+  footer{background:var(--text);color:var(--bg);}
+  footer .social{display:flex;gap:18px;font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;}
+  footer .social a{color:var(--bg);text-decoration:none;}
+  footer .social a:hover{color:rgba(243,242,242,.7);}
+  footer .fine{font-size:12px;line-height:1.6;margin-top:16px;color:rgba(243,242,242,.72);}
+  footer .fine a{color:var(--bg);text-decoration:underline;}
+</style>
 </head>
 <body>
-    <div class="email-container">
-        
-        <!-- Header -->
-        <div class="header">
-            <div class="logo">
-                <span class="logo-flag">🇨🇭</span> SwissAdmin.ai
-            </div>
-            <div class="issue-number">
-                Newsletter #1 · 30 août 2026
-            </div>
-        </div>
-        
-        <!-- Welcome -->
-        <div class="welcome">
-            <h2>👋 Bonjour,</h2>
-            <p>
-                Bienvenue dans la première édition de SwissAdmin.ai ! Chaque semaine, vous recevrez des conseils pratiques pour gérer l'administration de votre entreprise en Suisse. Pas de blabla, que du concret.
-            </p>
-        </div>
-        
-        <!-- Main Content -->
-        <div class="content">
-            <div class="content-header">
-                <span class="content-label">📋 Sujet de la semaine</span>
-                <h1>Sàrl, Raison individuelle ou SA : Comment choisir ?</h1>
-            </div>
-            
-            <p class="content-intro">
-                C'est LA première question quand on se lance. Et la réponse n'est pas la même pour tout le monde. Voici un guide simple pour faire le bon choix.
-            </p>
-            
-            <!-- Option 1: Raison individuelle -->
-            <div class="option-card">
-                <h3>
-                    <span class="option-emoji">🏃</span>
-                    Raison individuelle
-                </h3>
-                <p class="option-subtitle">Parfait pour démarrer rapidement et tester votre idée</p>
-                
-                <div class="pros-cons">
-                    <h4>✅ Les avantages :</h4>
-                    <ul>
-                        <li>Création ultra-rapide (quelques jours)</li>
-                        <li>Coûts minimaux (200-500 CHF)</li>
-                        <li>Comptabilité simplifiée</li>
-                        <li>Idéal pour tester votre marché</li>
-                    </ul>
-                    
-                    <h4>⚠️ Les points d'attention :</h4>
-                    <ul>
-                        <li>Responsabilité personnelle illimitée</li>
-                        <li>Vos biens personnels peuvent être engagés</li>
-                        <li>Moins crédible face aux gros clients</li>
-                    </ul>
-                </div>
-                
-                <span class="cost-badge">💰 Coût : 200-500 CHF</span>
-            </div>
-            
-            <!-- Option 2: Sàrl -->
-            <div class="option-card">
-                <h3>
-                    <span class="option-emoji">🏢</span>
-                    Sàrl (Société à responsabilité limitée)
-                </h3>
-                <p class="option-subtitle">Le choix n°1 pour protéger votre patrimoine</p>
-                
-                <div class="pros-cons">
-                    <h4>✅ Les avantages :</h4>
-                    <ul>
-                        <li>Responsabilité limitée au capital social</li>
-                        <li>Protection de votre patrimoine personnel</li>
-                        <li>Image professionnelle crédible</li>
-                        <li>Peut avoir plusieurs associés</li>
-                    </ul>
-                    
-                    <h4>⚠️ Les points d'attention :</h4>
-                    <ul>
-                        <li>Capital minimum : 20'000 CHF</li>
-                        <li>Comptabilité plus complexe</li>
-                        <li>Coûts de création plus élevés</li>
-                    </ul>
-                </div>
-                
-                <span class="cost-badge">💰 Coût : 2'000-4'000 CHF + capital 20'000 CHF</span>
-            </div>
-            
-            <!-- Option 3: SA -->
-            <div class="option-card">
-                <h3>
-                    <span class="option-emoji">🏛️</span>
-                    SA (Société anonyme)
-                </h3>
-                <p class="option-subtitle">Pour les projets d'envergure et levées de fonds</p>
-                
-                <div class="pros-cons">
-                    <h4>✅ Les avantages :</h4>
-                    <ul>
-                        <li>Maximum de crédibilité</li>
-                        <li>Facilite la levée de fonds</li>
-                        <li>Actions facilement cessibles</li>
-                        <li>Idéal pour l'international</li>
-                    </ul>
-                    
-                    <h4>⚠️ Les points d'attention :</h4>
-                    <ul>
-                        <li>Capital minimum : 100'000 CHF</li>
-                        <li>Complexité administrative élevée</li>
-                        <li>Coûts importants</li>
-                    </ul>
-                </div>
-                
-                <span class="cost-badge">💰 Coût : 5'000-10'000 CHF + capital 100'000 CHF</span>
-            </div>
-            
-            <!-- Tip Box -->
-            <div class="tip-section">
-                <h4>💡 L'astuce de la semaine</h4>
-                <p>
-                    <strong>Vous pouvez commencer en raison individuelle et passer en Sàrl plus tard</strong> quand votre activité décolle. C'est ce que font 80% des entrepreneurs ! Vous testez votre marché sans bloquer 20'000 CHF, et vous transformez quand ça roule.
-                </p>
-            </div>
-        </div>
-        
-        <!-- CTA Download -->
-        <div class="cta-section">
-            <h3>📥 Téléchargez votre checklist gratuite</h3>
-            <p>Tableau comparatif complet + questions à vous poser avant de choisir</p>
-            <a href="#" class="cta-button">Télécharger la checklist</a>
-        </div>
-        
-        <!-- Resources -->
-        <div class="resources">
-            <h3>🔗 Ressources utiles</h3>
-            <ul class="resource-list">
-                <li><a href="https://www.zefix.ch">→ Registre du commerce suisse</a> - Vérifier si votre nom est disponible</li>
-                <li><a href="https://www.pme.admin.ch">→ PME.admin.ch</a> - Portail officiel pour créateurs d'entreprise</li>
-                <li><a href="https://www.easygov.swiss">→ Easygov.swiss</a> - Plateforme pour toutes vos démarches</li>
-            </ul>
-        </div>
-        
-        <!-- Next Week Preview -->
-        <div class="next-week">
-            <h4>📅 La semaine prochaine</h4>
-            <p>S'inscrire au Registre du Commerce : le guide pas à pas</p>
-        </div>
-        
-        <!-- Footer -->
-        <div class="footer">
-            <p>
-                <strong>SwissAdmin.ai</strong> - L'administration suisse, enfin claire<br>
-                Fait avec ❤️ pour les entrepreneurs suisses
-            </p>
-            
-            <div class="social-links">
-                <a href="#">LinkedIn</a> · 
-                <a href="#">Instagram</a> · 
-                <a href="#">Facebook</a>
-            </div>
-            
-            <p>
-                <a href="#">Se désabonner</a> · 
-                <a href="#">Voir en ligne</a> · 
-                <a href="#">Nous contacter</a>
-            </p>
-            
-            <p style="margin-top: 16px; font-size: 12px;">
-                SwissAdmin.ai · Suisse<br>
-                © 2026 Tous droits réservés
-            </p>
-        </div>
-        
+<div class="shell">
+
+  <section class="pad">
+    <a class="brand" href="/"><span class="sq"></span><span class="wm">Swissadmin<span class="dot">.ai</span></span></a>
+    <h1 class="lede">L'administration suisse, enfin claire.</h1>
+    <p class="sub">Une lettre hebdomadaire pour les entrepreneurs romands. Pas de blabla, que du concret — chaque semaine, une démarche expliquée pas à pas.</p>
+    <a class="btn" href="/inscription">S'inscrire — c'est gratuit</a>
+  </section>
+
+  <section class="pad seam">
+    <span class="kicker" style="margin-bottom:6px;">Les éditions</span>
+    <a class="ed" href="#"><span class="n">N°01</span><span><span class="t">Sàrl, raison individuelle ou SA : comment choisir ?</span><span class="d">30 août 2026</span></span></a>
+    <a class="ed" href="#"><span class="n">N°02</span><span><span class="t">S'inscrire au Registre du commerce, pas à pas</span><span class="d">6 septembre 2026</span></span></a>
+    <a class="ed" href="#"><span class="n">N°03</span><span><span class="t">TVA : quand s'assujettir, comment déclarer</span><span class="d">13 septembre 2026</span></span></a>
+    <a class="all" href="#">Toutes les éditions →</a>
+  </section>
+
+  <section class="pad seam about">
+    <span class="kicker">Qui suis-je</span>
+    <p><strong>Claudino Tavares Monteiro</strong>, entrepreneur à Bulle (FR). J'ai créé SwissAdmin.ai pour rendre l'administration suisse lisible par tout le monde — sans jargon et sans détour.</p>
+  </section>
+
+  <section class="pad seam">
+    <span class="kicker" style="margin-bottom:8px;">Ressources</span>
+    <a class="res" href="https://www.zefix.ch">Zefix — Registre du commerce</a>
+    <a class="res" href="https://www.pme.admin.ch">PME — portail des créateurs</a>
+    <a class="res" href="https://www.easygov.swiss">EasyGov — démarches en ligne</a>
+  </section>
+
+  <footer class="pad">
+    <div class="social">
+      <a href="#">LinkedIn</a><a href="#">Instagram</a><a href="#">Facebook</a>
     </div>
-    <!-- 100% privacy-first analytics -->
-<script data-collect-dnt="true" async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
-<noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif?collect-dnt=true" alt="" referrerpolicy="no-referrer-when-downgrade"/></noscript>
+    <div class="fine">Claudino Tavares Monteiro · Bulle (FR)<br><a href="/protection-donnees">Protection des données</a> · © 2026 SwissAdmin.ai</div>
+  </footer>
+
+</div>
 </body>
 </html>
