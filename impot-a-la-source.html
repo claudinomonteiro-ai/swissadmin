@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculateur d'impôt à la source 2026 : Genève, Vaud, Fribourg | SwissAdmin.ai</title>
+<meta name="description" content="Calculez gratuitement votre impôt à la source 2026 à Genève, Vaud et Fribourg : barème appliqué, montant mensuel retenu et salaire net estimé.">
+<link rel="canonical" href="https://swissadmin.ai/impot-a-la-source">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://swissadmin.ai/impot-a-la-source">
+<meta property="og:title" content="Calculateur d'impôt à la source 2026 : Genève, Vaud, Fribourg">
+<meta property="og:description" content="Barème appliqué, montant retenu chaque mois et salaire net estimé, selon les barèmes officiels 2026.">
+<meta property="og:locale" content="fr_CH">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f3f2f2; --text:#201e1d; --accent:#ec3013; --accent-deep:#b3260f;
+    --rule:#201e1d; --rule-soft:#d0cecd; --paper:#ffffff;
+    --font:'Archivo',system-ui,sans-serif;
+    --edge:clamp(22px,5vw,64px);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;}
+  body{background:var(--bg);color:var(--text);font-family:var(--font);-webkit-font-smoothing:antialiased;line-height:1.55;}
+  a{color:var(--accent-deep);}
+  a:hover{color:var(--accent);}
+  ::selection{background:rgba(236,48,19,.22);}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 var(--edge);}
+
+
+  /* header : identique au site */
+  .bar{border-bottom:1px solid var(--rule);}
+  .bar .wrap{display:flex;align-items:center;justify-content:space-between;padding-top:20px;padding-bottom:20px;}
+  .brand{display:inline-flex;align-items:center;gap:11px;text-decoration:none;color:var(--text);}
+  .brand .sq{width:18px;height:18px;background:var(--accent);flex:none;}
+  .brand .wm{font-weight:700;font-size:16px;letter-spacing:.16em;text-transform:uppercase;}
+  .brand .wm .dot{text-transform:none;letter-spacing:0;color:var(--accent);}
+  .bar-cta{font-weight:700;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--bg);background:var(--accent);padding:10px 16px;text-decoration:none;}
+  .bar-cta:hover{background:#d42a10;color:var(--bg);}
+
+  /* fil d'Ariane + titre */
+  .crumbs{font-size:13px;color:rgba(32,30,29,.6);padding-top:22px;}
+  .crumbs a{color:rgba(32,30,29,.6);text-decoration:none;}
+  .crumbs a:hover{color:var(--accent);}
+  .head{border-bottom:1px solid var(--rule);}
+  .head .wrap{padding-bottom:clamp(26px,4vw,40px);}
+  h1.lede{font-weight:800;font-size:clamp(32px,5vw,56px);line-height:1;letter-spacing:-.03em;margin:16px 0 0;margin-left:-.02em;max-width:18ch;}
+  .sub{font-size:clamp(16px,1.6vw,18px);margin:18px 0 0;color:rgba(32,30,29,.8);max-width:58ch;}
+
+  /* grille principale : comme la page d'accueil */
+  .grid{display:grid;grid-template-columns:1fr;}
+  .block{padding:clamp(28px,4vw,48px) var(--edge);}
+  .kicker{display:block;font-weight:700;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-deep);margin-bottom:14px;}
+
+  /* ---------- OUTIL ---------- */
+  .tool{background:var(--paper);border:1px solid var(--rule);}
+  .tool-in{padding:clamp(18px,3vw,28px);}
+
+  /* sélecteur de canton : boutons segmentés */
+  .cantons{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--rule);}
+  .cantons button{font-family:var(--font);font-size:15px;font-weight:700;background:var(--paper);color:var(--text);
+    border:0;border-right:1px solid var(--rule);padding:15px 10px;cursor:pointer;text-align:center;}
+  .cantons button:last-child{border-right:0;}
+  .cantons button small{display:block;font-weight:500;font-size:12px;color:rgba(32,30,29,.55);margin-top:2px;}
+  .cantons button[aria-pressed="true"]{background:var(--accent);color:var(--bg);}
+  .cantons button[aria-pressed="true"] small{color:rgba(243,242,242,.8);}
+  .cantons button:focus-visible{outline:3px solid var(--text);outline-offset:-3px;}
+
+  .fields{display:grid;grid-template-columns:1fr 1fr;gap:16px 20px;}
+  .fields .full{grid-column:1/-1;}
+  label{display:block;font-size:13px;font-weight:700;margin-bottom:6px;}
+  input[type=number],select{width:100%;font-family:var(--font);font-size:16px;color:var(--text);background:var(--bg);
+    border:1px solid var(--rule);border-radius:0;padding:11px 12px;appearance:none;-webkit-appearance:none;}
+  select{background-image:linear-gradient(45deg,transparent 50%,var(--text) 50%),linear-gradient(135deg,var(--text) 50%,transparent 50%);
+    background-position:calc(100% - 18px) 50%,calc(100% - 13px) 50%;background-size:5px 5px;background-repeat:no-repeat;padding-right:34px;}
+  input:focus,select:focus{outline:2px solid var(--accent);outline-offset:0;}
+  .money{position:relative;}
+  .money span{position:absolute;left:12px;top:50%;transform:translateY(-50%);font-weight:600;color:rgba(32,30,29,.55);font-size:15px;pointer-events:none;}
+  .money input{padding-left:50px;}
+  .checks{display:flex;flex-wrap:wrap;gap:10px 26px;}
+  .check{display:flex;align-items:center;gap:9px;font-size:15px;font-weight:500;margin:0;cursor:pointer;}
+  .check input{width:18px;height:18px;accent-color:var(--accent);margin:0;}
+
+  .opt{font-weight:400;color:rgba(32,30,29,.55);}
+  input::placeholder{color:rgba(32,30,29,.45);}
+  .hint{font-size:13px;margin:14px 0 0;padding:10px 12px;border-left:3px solid var(--accent);background:var(--bg);}
+  .rows.annual{margin-top:16px;}
+  .rows.annual .row{font-size:14px;}
+
+  /* résultat */
+  .result{border-top:1px solid var(--rule);background:var(--bg);padding:clamp(18px,3vw,28px);}
+  .r-top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 24px;}
+  .r-amount{font-weight:800;font-size:clamp(40px,6vw,58px);line-height:1;letter-spacing:-.03em;color:var(--accent);font-feature-settings:'tnum' 1;}
+  .r-label{font-size:14px;color:rgba(32,30,29,.7);margin-top:6px;}
+  .r-code{text-align:right;}
+  .r-code b{display:inline-block;font-size:15px;border:1px solid var(--rule);padding:4px 10px;background:var(--paper);}
+  .r-code div{font-size:13px;color:rgba(32,30,29,.65);margin-top:6px;}
+  .rows{margin-top:20px;border-top:1px solid var(--rule-soft);}
+  .row{display:flex;justify-content:space-between;gap:16px;padding:9px 0;border-bottom:1px solid var(--rule-soft);font-size:15px;font-feature-settings:'tnum' 1;}
+  .row .k{color:rgba(32,30,29,.75);}
+  .row > span:last-child{white-space:nowrap;text-align:right;}
+  .row.net{border-bottom:2px solid var(--rule);font-weight:800;font-size:17px;}
+  .row.net .k{color:var(--text);}
+  .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px;}
+  .btn{display:inline-block;font-family:var(--font);font-weight:700;font-size:14px;background:var(--accent);color:var(--bg);
+    border:1px solid var(--accent);border-radius:0;padding:12px 18px;cursor:pointer;text-decoration:none;}
+  .btn:hover{background:#d42a10;border-color:#d42a10;color:var(--bg);}
+  .btn.line{background:transparent;color:var(--text);border-color:var(--rule);}
+  .btn.line:hover{background:var(--text);color:var(--bg);}
+  .btn:focus-visible{outline:3px solid var(--text);outline-offset:2px;}
+  .disclaimer{font-size:13px;color:rgba(32,30,29,.62);margin:14px 0 0;}
+
+  /* encart newsletter : remplace le premier emplacement pub */
+  .nl{background:var(--text);color:var(--bg);padding:clamp(22px,3.5vw,32px);margin:28px 0 0;
+    display:grid;grid-template-columns:1fr auto;gap:16px 28px;align-items:center;}
+  .nl .kicker{color:#ff7a62;margin-bottom:8px;}
+  .nl p{margin:0;font-size:clamp(17px,1.8vw,20px);font-weight:700;line-height:1.3;letter-spacing:-.01em;max-width:40ch;}
+  .nl small{display:block;font-size:13px;font-weight:400;color:rgba(243,242,242,.7);margin-top:8px;letter-spacing:0;}
+  .nl .btn{white-space:nowrap;}
+
+  /* emplacement pub éventuel (optionnel) */
+  .ad{margin:32px 0;border:2px dashed var(--rule-soft);background:var(--paper);text-align:center;padding:22px 12px;color:rgba(32,30,29,.55);font-size:13px;}
+
+  /* contenu éditorial */
+  .content h2{font-weight:800;font-size:clamp(22px,2.4vw,28px);line-height:1.15;letter-spacing:-.02em;margin:44px 0 12px;max-width:30ch;}
+  .content p,.content li{font-size:16px;line-height:1.65;color:rgba(32,30,29,.86);max-width:66ch;}
+  .content p{margin:0 0 14px;}
+  .content ul{margin:0 0 14px;padding-left:20px;}
+  .content li{margin-bottom:6px;}
+  .content strong{color:var(--text);}
+  table{width:100%;border-collapse:collapse;margin:6px 0 16px;font-size:15px;background:var(--paper);border:1px solid var(--rule);}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--rule-soft);vertical-align:top;}
+  th{font-weight:700;border-bottom:1px solid var(--rule);}
+  td:first-child{font-weight:800;color:var(--accent);width:70px;}
+  tr:last-child td{border-bottom:0;}
+  .faq{border-top:1px solid var(--rule);}
+  .faq details:last-child{border-bottom:1px solid var(--rule);}
+  details{border-bottom:1px solid var(--rule-soft);}
+  summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px;padding:16px 0;font-weight:700;font-size:16px;}
+  summary::-webkit-details-marker{display:none;}
+  summary::after{content:"+";font-weight:800;color:var(--accent);font-size:20px;line-height:1;}
+  details[open] summary::after{content:"–";}
+  summary:hover{color:var(--accent);}
+  details p{margin:0 0 16px !important;}
+  .content p.sources{font-size:13px;color:rgba(32,30,29,.62);max-width:none;margin-top:44px;}
+
+  /* colonne de droite */
+  .res{display:block;padding:12px 0;border-top:1px solid var(--rule-soft);font-size:15px;font-weight:600;color:var(--text);text-decoration:none;}
+  .res:first-of-type{border-top:0;padding-top:2px;}
+  .res:hover{color:var(--accent);}
+  .res .soon{font-weight:500;font-size:12px;color:rgba(32,30,29,.5);margin-left:6px;}
+  .ed{display:grid;grid-template-columns:auto 1fr;gap:14px;padding:14px 0;border-top:1px solid var(--rule-soft);text-decoration:none;color:var(--text);}
+  .ed:first-of-type{border-top:0;padding-top:2px;}
+  .ed:hover .t{color:var(--accent);}
+  .ed .n{font-weight:800;font-size:13px;color:var(--accent);}
+  .ed .t{font-weight:700;font-size:15px;line-height:1.3;}
+  .aside-nl p{font-size:15px;line-height:1.55;margin:0 0 16px;color:rgba(32,30,29,.82);}
+
+  @media(min-width:900px){
+    .grid{grid-template-columns:1.75fr 1fr;}
+    .grid .main{border-right:1px solid var(--rule);}
+    .grid .aside .block + .block{border-top:1px solid var(--rule);}
+    .aside-sticky{position:sticky;top:0;}
+  }
+  @media(max-width:899px){
+    .grid .aside .block{border-top:1px solid var(--rule);}
+  }
+  @media(max-width:560px){
+    .fields{grid-template-columns:1fr;}
+    .nl{grid-template-columns:1fr;}
+    .r-code{text-align:left;}
+  }
+
+  footer{background:var(--text);color:var(--bg);}
+  footer .wrap{padding-top:32px;padding-bottom:36px;display:flex;flex-wrap:wrap;gap:20px 48px;justify-content:space-between;align-items:flex-start;}
+  footer .social{display:flex;gap:20px;font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;}
+  footer .social a{color:var(--bg);text-decoration:none;}
+  footer .fine{font-size:12px;line-height:1.7;color:rgba(243,242,242,.72);}
+  footer .fine a{color:var(--bg);text-decoration:underline;}
+
+  @media (prefers-reduced-motion:reduce){*{transition:none !important;}}
+</style>
+</head>
+<body>
+
+  <header class="bar">
+    <div class="wrap">
+      <a class="brand" href="/"><span class="sq"></span><span class="wm">Swissadmin<span class="dot">.ai</span></span></a>
+      <a class="bar-cta" href="/inscription">S'inscrire</a>
+    </div>
+  </header>
+
+  <section class="head">
+    <div class="wrap">
+      <div class="crumbs"><a href="/">Accueil</a> / Outils / Impôt à la source</div>
+      <h1 class="lede">Calculateur d'impôt à la source 2026</h1>
+      <p class="sub">Choisissez votre canton et indiquez votre salaire brut. Vous voyez le barème appliqué, le montant retenu chaque mois et votre salaire net estimé.</p>
+    </div>
+  </section>
+
+  <div class="grid">
+    <main class="main block">
+
+      <!-- OUTIL -->
+      <section class="tool" id="calcul" aria-label="Calculateur d'impôt à la source">
+        <div class="cantons" role="group" aria-label="Canton">
+          <button type="button" data-c="GE" aria-pressed="false">Genève<small>GE</small></button>
+          <button type="button" data-c="VD" aria-pressed="false">Vaud<small>VD</small></button>
+          <button type="button" data-c="FR" aria-pressed="true">Fribourg<small>FR</small></button>
+        </div>
+
+        <div class="tool-in">
+          <div class="fields">
+            <div>
+              <label for="brut">Salaire brut mensuel</label>
+              <div class="money"><span>CHF</span><input id="brut" type="number" inputmode="decimal" value="6500" min="0" step="50"></div>
+            </div>
+            <div>
+              <label for="mois">Nombre de salaires par an</label>
+              <select id="mois"><option value="12">12 salaires</option><option value="13" selected>13 salaires</option></select>
+            </div>
+            <div>
+              <label for="situation">Situation familiale</label>
+              <select id="situation">
+                <option value="A">Personne seule</option>
+                <option value="B">Marié, un seul revenu</option>
+                <option value="C">Marié, deux revenus</option>
+                <option value="H">Seul avec enfants à charge</option>
+              </select>
+            </div>
+            <div>
+              <label for="enfants">Enfants donnant droit aux allocations</label>
+              <select id="enfants"></select>
+            </div>
+            <div>
+              <label for="age">Âge (pour la prévoyance LPP)</label>
+              <select id="age">
+                <option value="0">Moins de 25 ans</option>
+                <option value="7">25 à 34 ans</option>
+                <option value="10" selected>35 à 44 ans</option>
+                <option value="15">45 à 54 ans</option>
+                <option value="18">55 à 65 ans</option>
+              </select>
+            </div>
+            <div>
+              <label for="lpp">Ma cotisation LPP mensuelle <span class="opt">(facultatif)</span></label>
+              <div class="money"><span>CHF</span><input id="lpp" type="number" inputmode="decimal" min="0" step="10" placeholder="selon fiche de salaire"></div>
+            </div>
+          </div>
+          <p class="hint" id="hint" hidden></p>
+        </div>
+
+        <div class="result" aria-live="polite">
+          <div class="r-top">
+            <div>
+              <div class="r-amount" id="r-impot">CHF 0.00</div>
+              <div class="r-label">d'impôt à la source retenu chaque mois</div>
+            </div>
+            <div class="r-code">
+              <b id="r-bareme">Barème A0N</b>
+              <div id="r-taux"></div>
+            </div>
+          </div>
+          <div class="rows">
+            <div class="row"><span class="k">Salaire brut mensuel</span><span id="r-brut"></span></div>
+            <div class="row"><span class="k">AVS, AI, APG (5,3 %)</span><span id="r-avs"></span></div>
+            <div class="row"><span class="k">Assurance chômage (1,1 %)</span><span id="r-ac"></span></div>
+            <div class="row"><span class="k" id="k-lpp">Prévoyance LPP</span><span id="r-lpp"></span></div>
+            <div class="row"><span class="k">Impôt à la source</span><span id="r-impot2"></span></div>
+            <div class="row net"><span class="k">Salaire net estimé</span><span id="r-net"></span></div>
+          </div>
+          <div class="rows annual">
+            <div class="row"><span class="k">Revenu annuel qui détermine le taux</span><span id="r-annuel"></span></div>
+            <div class="row" id="row-13"><span class="k">Retenue le mois du 13e salaire</span><span id="r-13"></span></div>
+            <div class="row"><span class="k">Impôt à la source sur l'année</span><span id="r-total"></span></div>
+          </div>
+          <div class="actions">
+            <button type="button" class="btn" id="copy">Copier le résultat</button>
+            <a class="btn line" href="#baremes">Comprendre mon barème</a>
+          </div>
+          <p class="disclaimer">Calcul fondé sur les barèmes officiels 2026 du canton choisi, pour un seul emploi exercé toute l'année. L'impôt dépend du salaire brut et du barème, pas des cotisations sociales. Le salaire net reste une estimation : la LPP suit le minimum légal si vous ne saisissez pas votre cotisation. L'assurance accidents non professionnels et la perte de gain maladie ne sont pas déduites. En cas de bonus, de plusieurs emplois ou d'entrée en cours d'année, le taux peut différer.</p>
+        </div>
+      </section>
+
+      <!-- ENCART NEWSLETTER -->
+      <aside class="nl">
+        <div>
+          <span class="kicker">La lettre SwissAdmin.ai</span>
+          <p>Vous pensez créer votre entreprise en Suisse ? Chaque semaine, une démarche administrative expliquée pas à pas.<small>Gratuit. Un courriel par semaine. Désinscription en un clic.</small></p>
+        </div>
+        <a class="btn" href="/inscription">S'inscrire gratuitement</a>
+      </aside>
+
+      <!-- CONTENU -->
+      <article class="content">
+        <h2>Comment lire votre code de barème</h2>
+        <p>Le code figure sur votre fiche de salaire, par exemple <strong>A0N</strong> ou <strong>C2Y</strong>. La lettre indique votre situation familiale. Le chiffre correspond au nombre d'enfants à charge. La dernière lettre précise si l'impôt ecclésiastique est prélevé (Y) ou non (N).</p>
+        <p>Si le code ne correspond pas à votre situation réelle, vous pouvez demander une rectification à l'administration fiscale de votre canton jusqu'au 31 mars de l'année suivante.</p>
+
+        <h2>Qui paie l'impôt à la source</h2>
+        <ul>
+          <li>Les travailleurs étrangers domiciliés en Suisse qui n'ont pas de permis C, notamment les titulaires d'un permis B ou L.</li>
+          <li>Les frontaliers, selon des règles qui varient fortement d'un canton à l'autre.</li>
+          <li>Une personne mariée à un Suisse ou à un titulaire de permis C est en principe imposée selon la procédure ordinaire.</li>
+        </ul>
+
+        <h2 id="baremes">Les principaux barèmes</h2>
+        <table>
+          <tr><th>Code</th><th>Situation</th></tr>
+          <tr><td>A</td><td>Personne seule : célibataire, divorcée, séparée ou veuve.</td></tr>
+          <tr><td>B</td><td>Couple marié ou en partenariat enregistré dont un seul membre exerce une activité lucrative.</td></tr>
+          <tr><td>C</td><td>Couple marié ou en partenariat enregistré dont les deux membres exercent une activité lucrative.</td></tr>
+          <tr><td>H</td><td>Personne seule qui vit avec des enfants et assume l'essentiel de leur entretien.</td></tr>
+        </table>
+
+        <h2>Genève, Vaud, Fribourg : ce qui change pour les frontaliers</h2>
+        <p><strong>Genève</strong> impose les frontaliers à la source. Celui dont au moins 90 % des revenus bruts mondiaux, conjoint compris, sont imposables en Suisse peut demander une taxation ordinaire ultérieure comme quasi-résident pour faire valoir ses déductions. La demande vaut pour une année et peut être renouvelée.</p>
+        <p><strong>Vaud</strong> applique l'accord franco-suisse de 1983 : le frontalier résidant en France est imposé en France s'il rentre à son domicile au moins quatre jours par semaine (pour un plein temps), s'il remet une attestation de résidence fiscale à son employeur et s'il ne télétravaille pas plus de 40 %. Sinon, l'impôt est retenu à la source.</p>
+        <p><strong>Fribourg</strong> n'est pas couvert par cet accord. Le frontalier qui y travaille est en principe imposé à la source en Suisse.</p>
+
+        <h2>La taxation ordinaire ultérieure</h2>
+        <p>La taxation ordinaire ultérieure est obligatoire si votre revenu brut annuel soumis à l'impôt à la source dépasse CHF 120'000 (les revenus des conjoints ne sont pas additionnés). Elle l'est aussi si vous avez une fortune imposable ou des revenus non imposés à la source, par exemple une activité indépendante, une pension alimentaire ou des revenus immobiliers. Vous devez alors demander la déclaration d'impôt avant le 31 mars de l'année suivante. L'impôt retenu à la source devient un acompte.</p>
+        <p>En dehors de ces cas, vous pouvez la demander par écrit jusqu'au 31 mars de l'année suivante. Elle vaut souvent la peine si vous versez dans un 3e pilier A, si vous avez des frais de garde ou si vous rachetez des années de prévoyance. Attention : la demande est définitive et s'applique aussi aux années suivantes. Le résultat peut être plus favorable ou moins favorable que l'impôt retenu.</p>
+
+        <h2>Questions fréquentes</h2>
+        <div class="faq">
+          <details><summary>Puis-je déduire mon 3e pilier de l'impôt à la source ?</summary><p>Pas directement sur la fiche de salaire. Il faut demander une taxation ordinaire ultérieure pour faire valoir cette déduction.</p></details>
+          <details><summary>Mon employeur a appliqué le mauvais barème. Que faire ?</summary><p>Demandez une décision sur la retenue à l'administration fiscale de votre canton au plus tard le 31 mars de l'année suivante, en joignant votre certificat de salaire ou l'attestation de l'impôt retenu.</p></details>
+          <details><summary>Le 13e salaire est-il imposé à la source ?</summary><p>Oui. À Genève, dans le canton de Vaud et à Fribourg, il compte dès janvier dans le revenu annuel qui fixe le taux, même s'il n'est versé qu'en fin d'année. Il est ensuite soumis à ce taux le mois de son versement.</p></details>
+          <details><summary>Dois-je encore remplir une déclaration d'impôt ?</summary><p>Non, en principe. Vous devez en remplir une si vous êtes soumis à la taxation ordinaire ultérieure (revenu supérieur à CHF 120'000, fortune ou autres revenus) ou si vous l'avez demandée.</p></details>
+        </div>
+
+        <p class="sources">Sources : barèmes 2026 des administrations fiscales de Genève, Vaud et Fribourg, publiés par l'Administration fédérale des contributions le 3 décembre 2025 et valables dès le 1er janvier 2026. Cet outil est gratuit et ne conserve aucune donnée saisie.</p>
+      </article>
+    </main>
+
+    <!-- COLONNE DE DROITE -->
+    <div class="aside">
+      <div class="aside-sticky">
+        <section class="block">
+          <span class="kicker">Par canton</span>
+          <a class="res" href="#calcul" data-goto="GE">Impôt à la source Genève</a>
+          <a class="res" href="#calcul" data-goto="VD">Impôt à la source Vaud</a>
+          <a class="res" href="#calcul" data-goto="FR">Impôt à la source Fribourg</a>
+          <span class="res">Valais, Neuchâtel, Jura<span class="soon">bientôt</span></span>
+        </section>
+        <section class="block">
+          <span class="kicker">À lire aussi</span>
+          <a class="ed" href="https://lettre.swissadmin.ai/p/creer-entreprise-suisse-habiter-france" target="_blank" rel="noopener"><span class="n">N°13</span><span class="t">Créer en Suisse quand on habite en France : les quatre régimes à aligner</span></a>
+          <a class="ed" href="https://lettre.swissadmin.ai/p/prevoyance-independant-3a" target="_blank" rel="noopener"><span class="n">N°07</span><span class="t">Prévoyance de l'indépendant : combler le trou de la retraite</span></a>
+          <a class="ed" href="https://lettre.swissadmin.ai/p/assurances-sociales-independant" target="_blank" rel="noopener"><span class="n">N°06</span><span class="t">Indépendant : ce que vous perdez côté assurances sociales</span></a>
+        </section>
+        <section class="block aside-nl">
+          <span class="kicker">Recevoir la lettre</span>
+          <p>Pour celles et ceux qui créent leur entreprise en Suisse romande : chaque semaine, une démarche expliquée pas à pas.</p>
+          <a class="btn" href="/inscription">S'inscrire</a>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="wrap">
+      <div class="social">
+        <a href="https://www.linkedin.com/in/claudinotavaresmonteiro/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+      <div class="fine">Claudino Tavares Monteiro · Bulle (FR)<br><a href="/protection-donnees.html">Protection des données</a> · © 2026 SwissAdmin.ai</div>
+    </div>
+  </footer>
+
+<script>
+/* Calculateur d'impôt à la source 2026 (GE, VD, FR), modèle annuel.
+   Règles : circulaire AFC n° 45 et directives cantonales 2026.
+   - Revenu déterminant le taux = salaire mensuel x nombre de salaires (13e compris dès janvier).
+   - Barème mensuel consulté avec ce revenu annuel / 12 (tranche dont le début est le plus grand <= revenu).
+   - Retenue = salaire versé x taux, arrondie aux 5 centimes.
+   Cotisations 2026 (OFAS) : AVS/AI/APG 5,3 %, AC 1,1 % jusqu'à CHF 148'200 par an.
+   LPP minimum légal : seuil CHF 22'680, déduction de coordination CHF 26'460, plafond CHF 90'720,
+   salaire coordonné minimum CHF 3'780, part salarié = moitié de la bonification de vieillesse. */
+(function(){
+  var DATA_DIR = 'data/';
+  var cache = {};
+  var canton = 'FR';
+  var AVS = 0.053, AC = 0.011, AC_PLAFOND = 148200;
+  var LPP_SEUIL = 22680, LPP_COORD = 26460, LPP_MAX = 90720, LPP_MIN_COORD = 3780;
+
+  function $(id){ return document.getElementById(id); }
+  function r05(x){ return Math.round(x * 20) / 20; }
+  function chf(x){
+    var n = (Math.round(x * 100) / 100).toFixed(2).split('.');
+    return 'CHF ' + n[0].replace(/\B(?=(\d{3})+(?!\d))/g, "'") + '.' + n[1];
+  }
+  function chf0(x){ return 'CHF ' + Math.round(x).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'"); }
+  function pct(x){ return x.toFixed(2).replace('.', ',') + ' %'; }
+
+  function load(c, done){
+    var key = 'QST_2026_' + c;
+    if (window[key]) { done(window[key]); return; }
+    if (cache[c]) { cache[c].push(done); return; }
+    cache[c] = [done];
+    var sc = document.createElement('script');
+    sc.src = DATA_DIR + 'qst-2026-' + c.toLowerCase() + '.js';
+    sc.onload = function(){ var cb = cache[c]; cache[c] = null; cb.forEach(function(f){ f(window[key]); }); };
+    sc.onerror = function(){ cache[c] = null; $('r-taux').textContent = 'Barèmes indisponibles, réessayez.'; };
+    document.head.appendChild(sc);
+  }
+
+  function taux(bareme, revenu){
+    var f = bareme.f, r = bareme.r;
+    if (revenu < f[0]) return 0;
+    var lo = 0, hi = f.length - 1;
+    while (lo < hi){ var mid = (lo + hi + 1) >> 1; if (f[mid] <= revenu) lo = mid; else hi = mid - 1; }
+    return r[lo] / 100;
+  }
+
+  function majEnfants(max){
+    var sel = $('enfants'), v = parseInt(sel.value || '0', 10), html = '';
+    var h = $('situation').value === 'H';
+    for (var i = h ? 1 : 0; i <= max; i++){
+      html += '<option value="' + i + '">' + i + (i === max && canton === 'GE' ? ' ou plus' : '') + '</option>';
+    }
+    sel.innerHTML = html;
+    sel.value = String(Math.min(Math.max(v, h ? 1 : 0), max));
+  }
+
+  function lppMinimum(annuel, bonif){
+    if (annuel < LPP_SEUIL || bonif === 0) return 0;
+    var coord = Math.max(Math.min(annuel, LPP_MAX) - LPP_COORD, LPP_MIN_COORD);
+    return coord * bonif / 100 / 2 / 12;
+  }
+
+  var dernier = null;
+  function calc(){
+    load(canton, function(d){
+      majEnfants(d.meta.maxEnfants);
+      var brut = Math.max(parseFloat($('brut').value) || 0, 0);
+      var n = parseInt($('mois').value, 10);
+      var s = $('situation').value;
+      var e = parseInt($('enfants').value, 10) || 0;
+      var code = s + e;
+      var annuel = brut * n;
+      var t = taux(d.b[code], annuel / 12);
+      var impot = r05(brut * t / 100);
+      var avs = brut * AVS;
+      var ac = Math.min(annuel, AC_PLAFOND) / n * AC;
+      var saisie = parseFloat($('lpp').value);
+      var lpp = saisie >= 0 ? saisie : lppMinimum(annuel, parseInt($('age').value, 10));
+      var net = brut - avs - ac - lpp - impot;
+
+      $('r-impot').textContent = chf(impot);
+      $('r-impot2').textContent = '− ' + chf(impot);
+      $('r-bareme').textContent = 'Barème ' + code + 'N';
+      $('r-taux').textContent = 'taux ' + pct(t) + ', ' + d.meta.nom;
+      $('r-brut').textContent = chf(brut);
+      $('r-avs').textContent = '− ' + chf(avs);
+      $('r-ac').textContent = '− ' + chf(ac);
+      $('k-lpp').textContent = saisie >= 0 ? 'Prévoyance LPP (montant saisi)' : 'Prévoyance LPP (minimum légal)';
+      $('r-lpp').textContent = '− ' + chf(lpp);
+      $('r-net').textContent = chf(net);
+      $('r-annuel').textContent = chf0(annuel);
+      $('row-13').hidden = n !== 13;
+      $('r-13').textContent = chf(r05(brut * 2 * t / 100));
+      $('r-total').textContent = chf(r05(annuel * t / 100));
+
+      var hint = $('hint');
+      if (annuel > 120000){
+        hint.hidden = false;
+        hint.textContent = "Au-delà de CHF 120'000 de revenu brut annuel, la taxation ordinaire ultérieure est obligatoire. L'impôt retenu à la source devient alors un acompte.";
+      } else if (s === 'A' && e > 0){
+        hint.hidden = false;
+        hint.textContent = "Si vous vivez avec vos enfants et assumez l'essentiel de leur entretien, c'est en principe le barème H qui s'applique.";
+      } else { hint.hidden = true; }
+
+      dernier = 'Impôt à la source 2026, ' + d.meta.nom + ', barème ' + code + 'N : ' + chf(impot) + ' par mois sur un salaire brut de ' + chf(brut) + ' (taux ' + pct(t) + '). Calculé sur swissadmin.ai';
+    });
+  }
+
+  document.querySelectorAll('.cantons button').forEach(function(b){
+    b.addEventListener('click', function(){
+      canton = b.dataset.c;
+      document.querySelectorAll('.cantons button').forEach(function(x){ x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      calc();
+    });
+  });
+  ['brut','mois','situation','enfants','age','lpp'].forEach(function(id){ $(id).addEventListener('input', calc); });
+  $('copy').addEventListener('click', function(){
+    var b = this;
+    if (!dernier || !navigator.clipboard) return;
+    navigator.clipboard.writeText(dernier).then(function(){
+      b.textContent = 'Résultat copié';
+      setTimeout(function(){ b.textContent = 'Copier le résultat'; }, 1800);
+    }, function(){});
+  });
+  document.querySelectorAll('[data-goto]').forEach(function(a){
+    a.addEventListener('click', function(){
+      var b = document.querySelector('.cantons button[data-c="' + a.dataset.goto + '"]');
+      if (b) b.click();
+    });
+  });
+  calc();
+})();
+</script>
+</body>
+</html>
